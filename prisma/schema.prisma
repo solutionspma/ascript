@@ -1,0 +1,119 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Multi-tenant Account Model
+model Account {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String?
+  role          String    @default("user") // user, admin, genesis
+  tenantId      String?
+  tenant        Tenant?   @relation(fields: [tenantId], references: [id])
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  // Referrals created by this account
+  referrals     Referral[]
+  
+  @@index([email])
+  @@index([tenantId])
+}
+
+// Multi-tenant Organization/Practice
+model Tenant {
+  id            String    @id @default(cuid())
+  name          String
+  slug          String    @unique
+  domain        String?   @unique
+  
+  // Branding
+  logo          String?
+  primaryColor  String    @default("#0ea5e9")
+  
+  // Settings
+  settings      Json      @default("{}")
+  
+  // Relationships
+  accounts      Account[]
+  referrals     Referral[]
+  bonuses       Bonus[]
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  @@index([slug])
+}
+
+// Referral/Patient Lead
+model Referral {
+  id              String    @id @default(cuid())
+  tenantId        String
+  tenant          Tenant    @relation(fields: [tenantId], references: [id])
+  
+  // Patient Info
+  patientName     String
+  patientEmail    String?
+  patientPhone    String
+  
+  // Referrer Info
+  referrerId      String
+  referrer        Account   @relation(fields: [referrerId], references: [id])
+  referrerName    String?
+  
+  // Referral Details
+  serviceType     String?
+  insuranceType   String?
+  notes           String?
+  
+  // Status
+  status          String    @default("pending") // pending, contacted, scheduled, completed, cancelled
+  
+  // Tracking
+  contactedAt     DateTime?
+  scheduledAt     DateTime?
+  completedAt     DateTime?
+  
+  // Bonus tracking
+  bonuses         Bonus[]
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  @@index([tenantId])
+  @@index([referrerId])
+  @@index([status])
+}
+
+// Bonus/Payout Tracking
+model Bonus {
+  id              String    @id @default(cuid())
+  tenantId        String
+  tenant          Tenant    @relation(fields: [tenantId], references: [id])
+  
+  referralId      String
+  referral        Referral  @relation(fields: [referralId], references: [id])
+  
+  amount          Float
+  type            String    @default("referral") // referral, milestone, custom
+  status          String    @default("pending") // pending, approved, paid
+  
+  paidAt          DateTime?
+  notes           String?
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  
+  @@index([tenantId])
+  @@index([referralId])
+  @@index([status])
+}
