@@ -1,9 +1,9 @@
 import { Users, TrendingUp, DollarSign, Clock, Plus, BarChart3, Wallet } from 'lucide-react'
 import Link from 'next/link'
+import { getSession } from '@/lib/session'
 
 export default async function DashboardPage() {
-  // TEMP: Auth disabled for testing
-  const session = { user: { name: 'Jason Harris' } }
+  const session = await getSession()
 
   const stats = [
     { label: 'Total Referrals', value: '0', icon: Users, gradient: 'from-blue-500 to-cyan-500' },
@@ -19,7 +19,7 @@ export default async function DashboardPage() {
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10">
           <h1 className="text-4xl font-bold text-white mb-2">
-            Welcome back, {session?.user?.name}! 👋
+            Welcome back, {session?.name}! 👋
           </h1>
           <p className="text-blue-100 text-lg">
             Your healthcare referral network is ready to grow. Let's make an impact today.

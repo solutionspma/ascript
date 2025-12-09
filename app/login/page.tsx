@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 
 export default function LoginPage() {
@@ -18,34 +17,19 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
-      // Check if this is the genesis account trying to log in for first time
-      if (email === process.env.NEXT_PUBLIC_GENESIS_EMAIL || email === 'jason.harris@getcovered.life') {
-        // Check if account exists
-        const checkRes = await fetch('/api/check-account', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email })
-        })
-        
-        const checkData = await checkRes.json()
-        
-        if (!checkData.exists) {
-          // Redirect to setup
-          router.push('/setup?email=' + encodeURIComponent(email))
-          return
-        }
-      }
-
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       })
 
-      if (result?.error) {
-        setError('Invalid email or password')
+      const data = await res.json()
+
+      if (!res.ok) {
+        setError(data.error || 'Invalid email or password')
       } else {
         router.push('/dashboard')
+        router.refresh()
       }
     } catch (err) {
       setError('Something went wrong. Please try again.')

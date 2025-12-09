@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation'
+import { getSession } from '@/lib/session'
 import Sidebar from '@/components/Sidebar'
 
 export default async function DashboardLayout({
@@ -5,11 +7,11 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  // TEMP: Auth disabled for testing
-  // const session = await getServerSession(authOptions)
-  // if (!session) {
-  //   redirect('/login')
-  // }
+  const session = await getSession()
+  
+  if (!session) {
+    redirect('/login')
+  }
 
   return <Sidebar>{children}</Sidebar>
 }

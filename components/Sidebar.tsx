@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Menu, X, Home, Users, TrendingUp, DollarSign, Settings, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import LogoutButton from './LogoutButton'
 
 interface SidebarProps {
   children: React.ReactNode
@@ -86,7 +87,18 @@ export default function Sidebar({ children }: SidebarProps) {
           ))}
         </nav>
 
-        <div className="p-4 border-t border-slate-200">
+        <div className="p-4 border-t border-slate-200 space-y-2">
+          <AnimatePresence mode="wait">
+            {isOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <LogoutButton />
+              </motion.div>
+            )}
+          </AnimatePresence>
           <button className="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-slate-100 transition-colors text-slate-700 hover:text-slate-900 w-full">
             <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
               JH
@@ -146,7 +158,8 @@ export default function Sidebar({ children }: SidebarProps) {
                 ))}
               </nav>
 
-              <div className="p-4 border-t border-slate-200">
+              <div className="p-4 border-t border-slate-200 space-y-2">
+                <LogoutButton />
                 <div className="flex items-center gap-3 px-3 py-3">
                   <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm font-medium">
                     JH
