@@ -10,7 +10,7 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "postinstall": "prisma generate",
+    "postinstall": "./scripts/postinstall.sh",
     "deploy": "./deploy-netlify.sh",
     "deploy:manual": "netlify deploy --prod"
   },
