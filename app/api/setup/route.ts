@@ -84,8 +84,18 @@ export async function POST(req: Request) {
     })
   } catch (error) {
     console.error('Setup error:', error)
+    
+    // Return detailed error for debugging
+    const errorMessage = error instanceof Error ? error.message : 'Failed to create account'
+    const errorDetails = error instanceof Error ? error.stack : String(error)
+    
+    console.error('Error details:', errorDetails)
+    
     return NextResponse.json(
-      { error: 'Failed to create account' },
+      { 
+        error: errorMessage,
+        details: process.env.NODE_ENV === 'development' ? errorDetails : undefined
+      },
       { status: 500 }
     )
   }
