@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
           email: account.email,
           name: account.name,
           role: account.role,
-          tenantId: account.tenantId,
+          tenantId: account.tenantId ?? undefined,
           tenantSlug: account.tenant?.slug
         }
       }
