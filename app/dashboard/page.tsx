@@ -1,9 +1,8 @@
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth-options'
 import { Users, TrendingUp, DollarSign, Clock } from 'lucide-react'
 
 export default async function DashboardPage() {
-  const session = await getServerSession(authOptions)
+  // TEMP: Auth disabled for testing
+  const session = { user: { name: 'Test User' } }
 
   const stats = [
     { label: 'Total Referrals', value: '0', icon: Users, color: 'bg-blue-100 text-blue-600' },
