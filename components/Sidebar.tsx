@@ -96,14 +96,6 @@ export default function Sidebar({ children }: SidebarProps) {
             )
           })}
         </nav>
-                  >
-                    {item.label}
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </a>
-          ))}
-        </nav>
 
         <div className="p-4 border-t border-slate-200 space-y-2">
           <AnimatePresence mode="wait">
