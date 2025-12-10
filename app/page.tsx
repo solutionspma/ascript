@@ -56,30 +56,45 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="flex-1 flex items-center justify-center px-4 py-20 bg-gradient-to-b from-white to-slate-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
-            The Referral CRM Built for{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-              Modern Care Providers
-            </span>
-          </h1>
-          <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
-            Match patients with the right providers, automate referral workflows, and reward your network — all in one platform.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/dashboard"
-              className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium"
-            >
-              Enter Dashboard <ArrowRight className="ml-2" size={20} />
-            </Link>
-            <a
-              href="#how-it-works"
-              className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors text-lg font-medium"
-            >
-              Learn More
-            </a>
+      <section className="flex-1 flex items-center justify-center px-4 py-20 bg-gradient-to-br from-blue-50 via-white to-cyan-50 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500 rounded-full filter blur-3xl"></div>
+        </div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-left">
+              <h1 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
+                The Referral CRM Built for{' '}
+                <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+                  Modern Care Providers
+                </span>
+              </h1>
+              <p className="text-xl text-slate-600 mb-8">
+                Match patients with the right providers, automate referral workflows, and reward your network — all in one platform.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium shadow-lg hover:shadow-xl"
+                >
+                  Enter Dashboard <ArrowRight className="ml-2" size={20} />
+                </Link>
+                <a
+                  href="#how-it-works"
+                  className="inline-flex items-center justify-center border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors text-lg font-medium"
+                >
+                  Learn More
+                </a>
+              </div>
+            </div>
+            <div className="hidden lg:block">
+              <img 
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=600&fit=crop" 
+                alt="Healthcare professionals collaborating"
+                className="rounded-2xl shadow-2xl"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -150,8 +165,15 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="mb-6">
+                <img 
+                  src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=400&h=300&fit=crop" 
+                  alt="Receiving referrals"
+                  className="w-full h-48 object-cover rounded-xl"
+                />
+              </div>
+              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">
                 1
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-2">Receive Referrals</h3>
@@ -160,8 +182,15 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="mb-6">
+                <img 
+                  src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop" 
+                  alt="Auto engagement"
+                  className="w-full h-48 object-cover rounded-xl"
+                />
+              </div>
+              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">
                 2
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-2">Auto-Engage</h3>
@@ -170,8 +199,15 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+            <div className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="mb-6">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" 
+                  alt="Track and reward"
+                  className="w-full h-48 object-cover rounded-xl"
+                />
+              </div>
+              <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mb-4">
                 3
               </div>
               <h3 className="text-xl font-semibold text-slate-900 mb-2">Track & Reward</h3>
