@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     await createSession({
       id: account.id,
       email: account.email,
-      name: account.name,
+      name: account.name ?? '',
       role: account.role,
       tenantId: account.tenantId || undefined
     })
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
       user: {
         id: account.id,
         email: account.email,
-        name: account.name,
+        name: account.name ?? '',
         role: account.role
       }
     })

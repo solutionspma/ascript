@@ -1,11 +1,11 @@
 import { cookies } from 'next/headers'
-import { SignJWT, jwtVerify } from 'jose'
+import { SignJWT, jwtVerify, JWTPayload } from 'jose'
 
 const JWT_SECRET = new TextEncoder().encode(
   process.env.NEXTAUTH_SECRET || 'your-secret-key-change-in-production'
 )
 
-export interface SessionData {
+export interface SessionData extends JWTPayload {
   id: string
   email: string
   name: string
