@@ -69,10 +69,10 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/setup"
+              href="/dashboard"
               className="inline-flex items-center justify-center bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium"
             >
-              Get Started <ArrowRight className="ml-2" size={20} />
+              Enter Dashboard <ArrowRight className="ml-2" size={20} />
             </Link>
             <a
               href="#how-it-works"

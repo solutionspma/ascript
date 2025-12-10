@@ -1,9 +1,8 @@
 import { Users, TrendingUp, DollarSign, Clock, Plus, BarChart3, Wallet } from 'lucide-react'
 import Link from 'next/link'
-import { getSession } from '@/lib/session'
 
 export default async function DashboardPage() {
-  const session = await getSession()
+  const session = { name: 'Demo User' }
 
   const stats = [
     { label: 'Total Referrals', value: '0', icon: Users, gradient: 'from-blue-500 to-cyan-500' },
