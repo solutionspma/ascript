@@ -27,7 +27,7 @@ export default function Sidebar({ children }: SidebarProps) {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Mobile menu button */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 bg-white border-b border-slate-200 z-30 px-4 py-3 flex items-center justify-between">
+      <div className="lg:hidden fixed top-16 left-0 right-0 bg-white border-b border-slate-200 z-30 px-4 py-3 flex items-center justify-between">
         <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
           AScript
         </span>
@@ -43,7 +43,7 @@ export default function Sidebar({ children }: SidebarProps) {
       <motion.aside
         initial={false}
         animate={{ width: isOpen ? 256 : 80 }}
-        className="hidden lg:flex fixed left-0 top-0 h-screen bg-white border-r border-slate-200 flex-col z-40"
+        className="hidden lg:flex fixed left-0 top-16 bottom-16 bg-white border-r border-slate-200 flex-col z-40"
       >
         <div className="p-6 border-b border-slate-200 flex items-center justify-between">
           <AnimatePresence mode="wait">
@@ -146,7 +146,7 @@ export default function Sidebar({ children }: SidebarProps) {
               animate={{ x: 0 }}
               exit={{ x: -256 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="lg:hidden fixed left-0 top-0 h-screen w-64 bg-white border-r border-slate-200 flex flex-col z-50"
+              className="lg:hidden fixed left-0 top-16 bottom-16 w-64 bg-white border-r border-slate-200 flex flex-col z-50"
             >
               <div className="p-6 border-b border-slate-200">
                 <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
@@ -196,7 +196,7 @@ export default function Sidebar({ children }: SidebarProps) {
       <motion.main
         initial={false}
         animate={{ marginLeft: isOpen ? 256 : 80 }}
-        className="hidden lg:block min-h-screen"
+        className="hidden lg:block min-h-screen pt-16 pb-16"
       >
         <div className="p-8">
           {children}
@@ -204,7 +204,7 @@ export default function Sidebar({ children }: SidebarProps) {
       </motion.main>
 
       {/* Mobile Main Content */}
-      <div className="lg:hidden pt-16">
+      <div className="lg:hidden pt-32 pb-16">
         <div className="p-4">
           {children}
         </div>
