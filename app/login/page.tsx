@@ -10,6 +10,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showSetupInstructions, setShowSetupInstructions] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,6 +27,9 @@ export default function LoginPage() {
       const data = await res.json()
 
       if (!res.ok) {
+        if (res.status === 401 && email === 'jason.harris@getcovered.life') {
+          setShowSetupInstructions(true)
+        }
         setError(data.error || 'Invalid email or password')
       } else {
         router.push('/dashboard')
@@ -83,6 +87,33 @@ export default function LoginPage() {
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
                 {error}
+              </div>
+            )}
+
+            {showSetupInstructions && (
+              <div className="bg-yellow-50 border-2 border-yellow-400 text-yellow-900 px-4 py-4 rounded-lg text-sm space-y-3">
+                <div className="font-bold">⚠️ Genesis Account Not Found</div>
+                <div>Run this SQL in Supabase to create your account:</div>
+                <a 
+                  href="https://supabase.com/dashboard/project/ftqgrhmhkjabvpwkrdpn/sql/new"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-yellow-100 border border-yellow-300 px-3 py-2 rounded font-mono text-xs overflow-x-auto hover:bg-yellow-200"
+                >
+                  Click to open Supabase SQL Editor →
+                </a>
+                <div className="bg-slate-900 text-green-400 px-3 py-2 rounded font-mono text-xs overflow-x-auto">
+                  {`INSERT INTO "Account" (email, "passwordHash", name, role, "createdAt", "updatedAt")
+VALUES (
+  'jason.harris@getcovered.life',
+  '$2a$10$YN5A7Dn5v3fIDCoQdup/XOamn7y7n6UvyF7oRVc5EUpI9eAOL17sW',
+  'Jason Harris',
+  'genesis',
+  NOW(),
+  NOW()
+);`}
+                </div>
+                <div className="text-xs">After running, use password: <span className="font-bold">Genesis2025!</span></div>
               </div>
             )}
 
